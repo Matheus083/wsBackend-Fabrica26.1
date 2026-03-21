@@ -1,0 +1,12 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: spacelog_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: spacelog
+      MYSQL_USER: user_space
+      MYSQL_PASSWORD: space123
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
