@@ -234,7 +234,41 @@ O SpaceLog está em órbita estável, mas há muito mais espaço para explorar:
 - **🌐 Deploy na nuvem** — publicar o SpaceLog online para que qualquer pessoa possa criar seu diário sem instalar nada
 
 ---
+## 🔍 Notas de Desenvolvimento (Aos Avaliadores da fabrica).
 
+Este documento existe porque transparência técnica importa mais do que
+uma imagem perfeita.
+
+### 🎨 Front-end & UI
+O front-end foi desenvolvido **com auxílio integral de IA**. Direcionei o
+esforço para o que realmente diferencia o projeto — a lógica do back-end.
+O resultado é uma interface funcional, responsiva e coerente visualmente,
+entregue dentro do prazo.
+
+### ⚙️ Back-end & Lógica de Negócio
+O core do sistema foi **desenvolvido manualmente**. Isso inclui:
+- A integração com a API da NASA (autenticação, tratamento de erros,
+  mapeamento de resposta)
+- O fluxo completo de CRUD com Class-Based Views do Django
+- O tratamento do Error 429 e a lógica de fallback
+- A configuração do Docker com healthcheck e variáveis de ambiente via `.env`
+- O Management Command `fetch_apod` com suporte a `--date` e `--force`
+
+### 🏗️ Arquitetura & Decisões de Projeto
+A ideia do projeto, a modelagem do banco (`AstronomyPicture` com
+`unique=True` no campo `date`), a estruturação das rotas com namespace,
+a separação entre projeto e app, e a escolha de `get_or_create` como
+mecanismo anti-duplicata foram **pensadas e executadas de forma
+independente**. Cada decisão tem uma razão com base no meu conhecimento.
+
+### 📄 Documentação
+Infelizmente não consegui documentar o projeto ao todo, mas o que existe são
+**comentários manuais em pontos estratégicos** do código — especialmente
+nas views, no management command e nas configurações do banco — para que
+qualquer desenvolvedor consiga entender a lógica sem precisar de um guia
+externo. Este README é parte dessa intenção.
+
+---
 ## 📄 Licença
 
 Este projeto está sob a licença **MIT** — você pode usar, modificar e distribuir à vontade, desde que mantenha os créditos.
