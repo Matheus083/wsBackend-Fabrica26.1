@@ -4,6 +4,7 @@ from datetime import date
 import requests
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import IntegrityError
+from django.conf import settings
 
 from spacelog.models import AstronomyPicture
 
@@ -167,3 +168,20 @@ class Command(BaseCommand):
                     'Use --force to overwrite.'
                 )
             )
+
+def get_nasa_data(date):
+    # Tenta pegar a sua chave real. Se não achar, volta pra demo.
+    api_key = getattr(settings, "NASA_API_KEY", "DEMO_KEY")
+    url = f"https://api.nasa.gov/planetary/apod?api_key={api_key}&date={date}"
+    
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"--- [DEBUG FETCH] Erro {response.status_code}: {response.text}")
+            return None
+    except Exception as e:
+        print(f"--- [DEBUG FETCH] Erro de rede: {e}")
+        return None
+    
