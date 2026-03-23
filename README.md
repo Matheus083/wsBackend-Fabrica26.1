@@ -73,7 +73,7 @@ Você vai precisar ter instalado na sua máquina:
 ### Passo 1 — Baixar o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/spacelog.git
+git clone https://github.com/Matheus083/wsBackend-Fabrica26.1.git
 cd spacelog
 ```
 
